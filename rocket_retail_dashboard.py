@@ -12,7 +12,7 @@ def load_plot(image_name, caption):
     if file_path.exists():
         st.image(str(file_path), use_container_width=True, caption=caption)
     else:
-        st.warning(f"⚠️ Plot not found: {file_path}")
+        st.warning(f"Plot not found: {file_path}")
 
 # Custom function to load dataframes safely
 def load_summary(csv_name, section_title):
@@ -22,7 +22,7 @@ def load_summary(csv_name, section_title):
         df = pd.read_csv(file_path)
         st.dataframe(df, use_container_width=True)
     else:
-        st.warning(f"⚠️ Summary file not found: {file_path}")
+        st.warning(f"Summary file not found: {file_path}")
 
 # -----------------------------------------
 # Streamlit App Layout
