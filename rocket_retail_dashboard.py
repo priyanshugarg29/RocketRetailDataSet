@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from pathlib import Path
-
+import matplotlib.pyplot as plt
 
 # Setting results directory
 results_folder = Path(__file__).parent / 'results'
