@@ -1,15 +1,17 @@
-
-# streamlit_dashboard_updated.py
+# streamlit_dashboard_updated_fixed.py
 
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Set Streamlit page config
+# Set Streamlit page layout and title
 st.set_page_config(page_title="RetailRocket EDA", layout="wide")
 
+# --------------------------------------------
 # Section: Top 3-Step Interaction Sequences
+# --------------------------------------------
 
+# Defining common interaction sequences
 top_patterns = [
     ("view ➝ view ➝ view", 503814),
     ("view ➝ view ➝ addtocart", 23297),
@@ -25,33 +27,44 @@ top_patterns = [
 
 df_patterns = pd.DataFrame(top_patterns, columns=["Interaction Pattern", "Count"])
 
+# Display table of top patterns
 st.markdown("### Top 3-Step Interaction Patterns")
 st.dataframe(df_patterns.style.format({"Count": "{:,}"}))
 
-# Horizontal bar chart
+# Horizontal bar chart for visual clarity
 fig, ax = plt.subplots(figsize=(8, 5))
-df_patterns[::-1].plot(kind="barh", x="Interaction Pattern", y="Count", ax=ax, color="steelblue", legend=False)
-ax.set_title("Top 3-Step Interaction Sequences")
+df_patterns[::-1].plot(
+    kind="barh",
+    x="Interaction Pattern",
+    y="Count",
+    ax=ax,
+    color="steelblue",
+    legend=False
+)
+ax.set_title("Top 3-Step Interaction Sequences", fontsize=14)
 ax.set_xlabel("Count")
 ax.set_ylabel("Interaction Pattern")
 st.pyplot(fig)
 
-# Interpretation
+# --------------------------------------------
+# Interpretation of Findings
+# --------------------------------------------
+
 st.markdown("#### Interpretation")
-st.write(
-    "The most frequent pattern `view ➝ view ➝ view` reflects a strong browsing tendency, "
-    "which is a common user behavior in ecommerce platforms (Moe, 2003). Patterns like "
-    "`view ➝ addtocart ➝ transaction` reflect goal-directed behavior indicative of "
-    "purchase intent. Modeling such sequences can inform customer intent classification, "
-    "segment design, and sequence-aware recommendation strategies (Montgomery et al., 2004)."
-)
-
-# References
-st.markdown("### References")
 st.markdown(
-    "- Moe, W. W. (2003). Buying, searching, or browsing: Differentiating between online shoppers using in-store navigational clickstream. *Journal of Consumer Psychology*, 13(1-2), 29–39.
-"
-    "- Montgomery, A. L., Li, S., Srinivasan, K., & Liechty, J. (2004). Modeling online browsing and path analysis using clickstream data. *Marketing Science*, 23(4), 579–595."
+    "The most frequent pattern `view ➝ view ➝ view` reflects a strong browsing tendency, "
+    "which is commonly observed in ecommerce user behavior (Moe, 2003). "
+    "Patterns involving transitions like `view ➝ addtocart ➝ transaction` signify purposeful, goal-directed sessions "
+    "which likely end in purchase. Identifying such sequences is important for customer segmentation, "
+    "conversion prediction, and session-based recommendation models (Montgomery et al., 2004)."
 )
 
-# Note: This block is isolated for demonstration purposes. Additional EDA views should be added above.
+# --------------------------------------------
+# References (Harvard Style)
+# --------------------------------------------
+
+st.markdown("### References")
+st.markdown("""
+- Moe, W. W. (2003). Buying, searching, or browsing: Differentiating between online shoppers using in-store navigational clickstream. *Journal of Consumer Psychology*, 13(1-2), 29–39.
+- Montgomery, A. L., Li, S., Srinivasan, K., & Liechty, J. (2004). Modeling online browsing and path analysis using clickstream data. *Marketing Science*, 23(4), 579–595.
+""")
